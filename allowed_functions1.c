@@ -1,0 +1,82 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   allowed_functions1.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/10 18:56:50 by danalmei          #+#    #+#             */
+/*   Updated: 2023/07/10 21:03:43 by danalmei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "push_swap.h"
+
+void sa(t_stack *stack)
+{
+    if (stack->size > 1)
+    {
+        int tmp = stack->data[0];
+        stack->data[0] = stack->data[1];
+        stack->data[1] = tmp;
+    }
+}
+
+void sb(t_stack *stack)
+{
+    if (stack->size > 1)
+    {
+        int tmp = stack->data[0];
+        stack->data[0] = stack->data[1];
+        stack->data[1] = tmp;
+    }
+}
+
+void ss(t_stack *stack_a, t_stack *stack_b)
+{
+    sa(stack_a);
+    sb(stack_b);
+}
+
+void pa(t_stack *stack_a, t_stack *stack_b)
+{
+    int value;
+
+    if (stack_b->size > 0)
+    {
+        value = stack_b->data[0];
+        shift_stack_up(stack_b);
+        stack_a->size++;
+        stack_a->data = realloc(stack_a->data, stack_a->size * sizeof(int));
+        stack_a->data[0] = value;
+    }
+}
+
+void pb(t_stack *stack_a, t_stack *stack_b)
+{
+    int value;
+
+    if (stack_a->size > 0)
+    {
+        value = stack_a->data[0];
+        shift_stack_up(stack_a);
+        stack_b->size++;
+        stack_b->data = realloc(stack_b->data, stack_b->size * sizeof(int));
+        stack_b->data[0] = value;
+    }
+}
+
+void shift_stack_up(t_stack *stack)
+{
+    int i;
+
+    i = 0;
+    while (i < stack->size - 1)
+    {
+        stack->data[i] = stack->data[i + 1];
+        i++;
+    }
+    stack->size--;
+    stack->data = realloc(stack->data, stack->size * sizeof(int));
+}

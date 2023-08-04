@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:56:50 by danalmei          #+#    #+#             */
-/*   Updated: 2023/07/10 21:03:43 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/08/04 20:34:34 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ void ss(t_stack *stack_a, t_stack *stack_b)
 void pa(t_stack *stack_a, t_stack *stack_b)
 {
     int value;
-
+    
     if (stack_b->size > 0)
     {
         value = stack_b->data[0];
         shift_stack_up(stack_b);
-        stack_a->size++;
-        stack_a->data = realloc(stack_a->data, stack_a->size * sizeof(int));
+        shift_stack_down(stack_a);
         stack_a->data[0] = value;
     }
 }
@@ -61,8 +60,7 @@ void pb(t_stack *stack_a, t_stack *stack_b)
     {
         value = stack_a->data[0];
         shift_stack_up(stack_a);
-        stack_b->size++;
-        stack_b->data = realloc(stack_b->data, stack_b->size * sizeof(int));
+        shift_stack_down(stack_b);
         stack_b->data[0] = value;
     }
 }
@@ -78,5 +76,104 @@ void shift_stack_up(t_stack *stack)
         i++;
     }
     stack->size--;
-    stack->data = realloc(stack->data, stack->size * sizeof(int));
+}
+
+void shift_stack_down(t_stack *stack)
+{
+    int i;
+
+    i = stack->size - 1;
+    while (i >= 0)
+    {
+        stack->data[i + 1] = stack->data[i];
+        i--;
+    }
+    stack->size++;
+}
+
+void ra(t_stack *stack)
+{
+    int i;
+    int value;
+
+
+    if (stack->size > 1)
+    {
+        value = stack->data[0];
+        i = 0;
+        while (i < stack->size - 1)
+        {
+            stack->data[i] = stack->data[i + 1];
+            i++;
+        }
+        stack->data[stack->size - 1] = value;
+    }
+
+}
+
+void rb(t_stack *stack)
+{
+    int i;
+    int value;
+
+    if (stack->size > 1)
+    {
+        value = stack->data[0];
+        i = 0;
+        while (i < stack->size - 1)
+        {
+            stack->data[i] = stack->data[i + 1];
+            i++;
+        }
+        stack->data[stack->size - 1] = value;
+    }
+
+}
+
+void rr(t_stack *stack_a, t_stack *stack_b)
+{
+    ra(stack_a);
+    rb(stack_b);
+}
+
+void rra(t_stack *stack)
+{
+    int value;
+    int i;
+
+    if (stack->size > 1)
+    {
+        value = stack->data[stack->size - 1];
+        i = stack->size - 1;
+        while (i > 0)
+        {
+            stack->data[i] = stack->data[i - 1];
+            i--;
+        }
+        stack->data[0] = value;
+    }
+}
+
+void rrb(t_stack *stack)
+{
+    int value;
+    int i;
+
+    if (stack->size > 1)
+    {
+        value = stack->data[stack->size - 1];
+        i = stack->size - 1;
+        while (i > 0)
+        {
+            stack->data[i] = stack->data[i - 1];
+            i--;
+        }
+        stack->data[0] = value;
+    }
+}
+
+void rrr(t_stack *stack_a, t_stack *stack_b)
+{
+    rra(stack_a);
+    rrb(stack_b);
 }

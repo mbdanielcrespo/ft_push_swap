@@ -2,6 +2,7 @@
 #define ALLOWED_FUNCTIONS_H
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 #include "./printf_42/ft_printf.h"
 
 typedef struct s_stack
@@ -24,5 +25,10 @@ void rrb(t_stack *stack);
 void rrr(t_stack *stack_a, t_stack *stack_b);
 
 void shift_stack_up(t_stack *stack);
+void shift_stack_down(t_stack *stack);
 
-#endif /* ALLOWED_FUNCTIONS_H */
+void print_stack(const char *stack_name, const t_stack *stack);
+
+void turk_sort(t_stack *stack_a, t_stack *stack_b);
+
+#endif

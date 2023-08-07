@@ -29,6 +29,19 @@ void shift_stack_down(t_stack *stack);
 
 void print_stack(const char *stack_name, const t_stack *stack);
 
+int ft_min(int a, int b);
+int ft_max(int a, int b);
+int ft_abs(int a);
+
+void perform_rotations_a(t_stack *stack, int rotations);
+void perform_rotations_b(t_stack *stack, int rotations);
+void perform_rotations_both(t_stack *stack_a, t_stack *stack_b, int rotations);
+
+int calculate_rotations_to_top(t_stack *stack, int target_index);
+int calculate_r_both(int r_a, int r_b);
+int	calculate_ops(t_stack *stack_a, t_stack *stack_b, int index);
+int	calculate_target_index(t_stack *stack_a, t_stack *stack_b, int index);
+
 void turk_sort(t_stack *stack_a, t_stack *stack_b);
 
 #endif

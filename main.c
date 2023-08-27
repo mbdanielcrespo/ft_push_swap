@@ -1,26 +1,5 @@
 #include "push_swap.h"
 
-void init_stack(t_stack *stack, int max_size)
-{
-    stack->data = (int *)malloc((max_size + 1) * sizeof(int));
-    stack->size = 0;
-}
-
-void free_stack(t_stack *stack) {
-    free(stack->data);
-    stack->data = NULL;
-    stack->size = 0;
-}
-
-void print_stack(const char *stack_name, const t_stack *stack) 
-{
-    printf("%s Stack (size: %d): ", stack_name, stack->size);
-    for (int i = 0; i < stack->size; i++) {
-        printf("%d ", stack->data[i]);
-    }
-    printf("\n");
-}
-
 int ft_mod_atoi(const char *str, int *value) {
     int result = 0;
     int sign = 1;
@@ -44,12 +23,33 @@ int ft_mod_atoi(const char *str, int *value) {
     return (1);
 }
 
+void turk_sort(t_stack *stack_a, t_stack *stack_b)
+{
+    if (stack_a->size <= 3)
+        order_stack_size_3(stack_a);
+    else
+    {
+        while (!is_circularly_sorted(stack_a))
+        {
+            pb(stack_a, stack_b);
+            pb(stack_a, stack_b);
+            order_next_num(stack_a, stack_b);
+
+            pa(stack_a, stack_b);
+            pa(stack_a, stack_b);
+            order_next_num(stack_b, stack_a);
+        }
+        perform_rotations_a(stack_a, -rotations_to_sort(stack_a));
+    }
+}
+
 int main(int argc, char **argv)
 {
     t_stack stack_a;
     t_stack stack_b;
     int value;
     int i;
+
     if (argc < 2)
     {
         printf("List of integrers: %s\n", argv[0]);
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     }
     init_stack(&stack_a, argc - 1);
     init_stack(&stack_b, argc - 1);
-    printf("Stacks status before parsing\n");
+    printf("--------------------- Stacks status before parsing\n");
     print_stack("A", &stack_a);
     print_stack("B", &stack_b);
     printf("\n");
@@ -74,14 +74,14 @@ int main(int argc, char **argv)
         stack_a.data[stack_a.size++] = value;
         i++;
     }
-    printf("Stacks status before sorting\n");
+    printf("--------------------- Stacks status before sorting\n");
     print_stack("A", &stack_a);
     print_stack("B", &stack_b);
     printf("\n");
-
+    
     turk_sort(&stack_a, &stack_b);
 
-    printf("Stacks status after sorting\n");
+    printf("--------------------- Stacks status after sorting\n");
     print_stack("A", &stack_a);
     print_stack("B", &stack_b);
     printf("\n");

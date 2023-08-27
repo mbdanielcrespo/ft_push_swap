@@ -40,10 +40,6 @@ void push_from_index(t_stack *stack_a, t_stack *stack_b, int index)
     pb(stack_a, stack_b);
 }
 
-// Verificar valores de double rotations confirmar com os de cima (valores absolutos)
-// Fazer alguma forma para ver o numero de operacoes necessario para passar de um lado
-// para o outro no local ideal, nao num bom so
-
 void order_next_num(t_stack *stack_a, t_stack *stack_b)
 {
     int min_index;
@@ -66,18 +62,13 @@ void order_next_num(t_stack *stack_a, t_stack *stack_b)
             }
             i++;
         }
-		printf("VALUE TO BE PUSHED ops: %d, min_index: %d, value: %d\n", ops, min_index, stack_a->data[min_index]);
+        /*
+		printf("VALUE TO BE PUSHED ops: %d, min_index: %d, value: %d\n", min_ops, min_index, stack_a->data[min_index]);
 		print_stack("A", stack_a);
 		print_stack("B", stack_b);
+        */
         if (min_index == -1)
             break;
         push_from_index(stack_a, stack_b, min_index);
     }
-}
-
-void    turk_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	pb(stack_a, stack_b);
-	pb(stack_a, stack_b);
-    order_next_num(stack_a, stack_b);
 }

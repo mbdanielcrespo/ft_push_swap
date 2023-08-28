@@ -1,74 +1,130 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solver.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/28 13:07:09 by danalmei          #+#    #+#             */
+/*   Updated: 2023/08/28 16:53:19 by danalmei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void order_stack_size_3(t_stack *stack)
+void	order_stack_size_3(t_stack *stk)
 {
-    while(!(stack->data[0] < stack->data[1] && stack->data[1] < stack->data[2]))
-    {
-        if (stack->data[0] > stack->data[1] && stack->data[0] < stack->data[2])
-            sa(stack);
-        else if (stack->data[1] > stack->data[0] && stack->data[1] > stack->data[2])
-            rra(stack);
-        else if (stack->data[0] > stack->data[1] && stack->data[0] > stack->data[2])
-            ra(stack);
-    }
+	while (!(stk->data[0] < stk->data[1] && stk->data[1] < stk->data[2]))
+	{
+		if (stk->data[0] > stk->data[1] && stk->data[0] < stk->data[2])
+			sa(stk);
+		else if (stk->data[1] > stk->data[0] && stk->data[1] > stk->data[2])
+			rra(stk);
+		else if (stk->data[0] > stk->data[1] && stk->data[0] > stk->data[2])
+			ra(stk);
+	}
 }
 
-//void order_stack_size_5
-
-void push_from_index(t_stack *stack_a, t_stack *stack_b, int index)
+void	order_stack_size_4(t_stack *stk, t_stack *stk_b)
 {
-    int r_a;
-    int r_b;
+	int	min_index;
+
+	while (!is_stack_ordered(stk))
+	{
+		min_index = ft_index_of_min(stk);
+		if (min_index == 3)
+		{
+			pb(stk, stk_b);
+			order_stack_size_3(stk);
+			pa(stk, stk_b);
+			return ;
+		}
+		else
+		{
+			if (min_index == 0)
+				ra(stk);
+			else if (min_index == 1)
+				rra(stk);
+			else if (min_index == 2)
+				sa(stk);
+		}
+	}
+}
+
+void	order_stack_size_5(t_stack *stk, t_stack *stk_b)
+{
+	int	min_index;
+	int	i;
+
+	i = 0;
+	while (i < 2) 
+	{
+		min_index = ft_index_of_min(stk);
+		while (min_index != 0) 
+		{
+			if (min_index < 3)
+				ra(stk);
+			else
+				rra(stk);
+			min_index = ft_index_of_min(stk);
+		}
+		pb(stk, stk_b);
+		++i;
+	}
+	order_stack_size_3(stk);
+	pa(stk, stk_b);
+	pa(stk, stk_b); 
+}
+
+void	push_from_index(t_stack *stack_a, t_stack *stack_b, int index)
+{
+	int	r_a;
+	int	r_b;
 	int	r_both;
-	int target_index;
-	
+	int	target_index;
+
 	target_index = calculate_target_index(stack_a, stack_b, index);
 	if (index <= (stack_a->size / 2))
-        r_a = index;
-    else
-        r_a = -(stack_a->size - index);
-    if (target_index == stack_b->size)
-        r_b = -1;
-    else if (target_index <= (stack_b->size / 2))
-        r_b = target_index;
-    else
-        r_b = -(stack_b->size - target_index);
-    r_both = calculate_r_both(r_a, r_b);
-    perform_rotations_a(stack_a, (r_a - r_both));
+		r_a = index;
+	else
+		r_a = -(stack_a->size - index);
+	if (target_index == stack_b->size)
+		r_b = -1;
+	else if (target_index <= (stack_b->size / 2))
+		r_b = target_index;
+	else
+		r_b = -(stack_b->size - target_index);
+	r_both = calculate_r_both(r_a, r_b);
+	perform_rotations_a(stack_a, (r_a - r_both));
 	perform_rotations_b(stack_b, (r_b - r_both));
 	perform_rotations_both(stack_a, stack_b, r_both);
-    pb(stack_a, stack_b);
+	pb(stack_a, stack_b);
 }
 
-void order_next_num(t_stack *stack_a, t_stack *stack_b)
+void	order_next_num(t_stack *stack_a, t_stack *stack_b)
 {
-    int min_index;
-    int min_ops;
-    int ops;
-    int i;
-	
-    while (stack_a->size > 0)
-    {
-        min_index = -1;
-        min_ops = 2147483647;
+	int	min_index;
+	int	min_ops;
+	int	ops;
+	int	i;
+
+	while (stack_a->size > 0)
+	{
+		min_index = -1;
+		min_ops = 2147483647;
 		i = 0;
-        while (i < stack_a->size)
-        {
-            ops = calculate_ops(stack_a, stack_b, i);
-            if (ops < min_ops)
-            {
-                min_ops = ops;
-                min_index = i;
-            }
-            i++;
-        }
-        /*
-		printf("VALUE TO BE PUSHED ops: %d, min_index: %d, value: %d\n", min_ops, min_index, stack_a->data[min_index]);
-		print_stack("A", stack_a);
-		print_stack("B", stack_b);
-        */
-        if (min_index == -1)
-            break;
-        push_from_index(stack_a, stack_b, min_index);
-    }
+		while (i < stack_a->size)
+		{
+			ops = calculate_ops(stack_a, stack_b, i);
+			if (ops < min_ops)
+			{
+				min_ops = ops;
+				min_index = i;
+			}
+			i++;
+		}
+		if (min_index == -1)
+			break ;
+		push_from_index(stack_a, stack_b, min_index);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:42:34 by danalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 16:55:42 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:07:10 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		calculate_ops(t_stack *stack_a, t_stack *stack_b, int index);
 void	order_stack_size_3(t_stack *stack);
 void	order_stack_size_4(t_stack *stk, t_stack *stk_b);
 void	order_stack_size_5(t_stack *stk, t_stack *stk_b);
-void	order_next_num(t_stack *stack_a, t_stack *stack_b);
+void	order_next_num(t_stack *stack_a, t_stack *stack_b, int direction);
 void	turk_sort(t_stack *stack_a, t_stack *stack_b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:09 by danalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 16:53:19 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:21:25 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	order_stack_size_5(t_stack *stk, t_stack *stk_b)
 	pa(stk, stk_b);
 	pa(stk, stk_b); 
 }
-
-void	push_from_index(t_stack *stack_a, t_stack *stack_b, int index)
+/*
+void	push_from_index(t_stack *stack_a, t_stack *stack_b, int index, int direction)
 {
 	int	r_a;
 	int	r_b;
@@ -95,13 +95,41 @@ void	push_from_index(t_stack *stack_a, t_stack *stack_b, int index)
 	else
 		r_b = -(stack_b->size - target_index);
 	r_both = calculate_r_both(r_a, r_b);
+	
 	perform_rotations_a(stack_a, (r_a - r_both));
 	perform_rotations_b(stack_b, (r_b - r_both));
 	perform_rotations_both(stack_a, stack_b, r_both);
-	pb(stack_a, stack_b);
+	if (direction == 0)
+		pb(stack_a, stack_b);
+	else
+		pa(stack_a, stack_b);
+}
+*/
+void rotate_to_target(t_stack *stack_a, t_stack *stack_b, int index, int target_index {
+    int r_a;
+    int r_b;
+    int r_both;
+
+    // ... the logic to calculate r_a, r_b, r_both remains the same ...
+
+    perform_rotations_a(stack_a, (r_a - r_both));
+    perform_rotations_b(stack_b, (r_b - r_both));
+    perform_rotations_both(stack_a, stack_b, r_both);
 }
 
-void	order_next_num(t_stack *stack_a, t_stack *stack_b)
+void order_next_num_a_to_b(t_stack *stack_a, t_stack *stack_b, int index) {
+    int target_index = calculate_target_index(stack_a, stack_b, index);
+    rotate_to_target(stack_a, stack_b, index, target_index, 0);
+    pb(stack_a, stack_b);
+}
+
+void order_next_num_b_to_a(t_stack *stack_a, t_stack *stack_b, int index) {
+    int target_index = calculate_target_index(stack_a, stack_b, index);
+    rotate_to_target(stack_a, stack_b, index, target_index, 1);
+    pa(stack_a, stack_b);
+}
+
+void	order_next_num(t_stack *stack_a, t_stack *stack_b, int direction)
 {
 	int	min_index;
 	int	min_ops;
@@ -125,6 +153,6 @@ void	order_next_num(t_stack *stack_a, t_stack *stack_b)
 		}
 		if (min_index == -1)
 			break ;
-		push_from_index(stack_a, stack_b, min_index);
+		push_from_index(stack_a, stack_b, min_index, direction);
 	}
 }

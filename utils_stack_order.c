@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:26:01 by danalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 16:14:32 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/08/30 20:13:15 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,26 @@ int	rotations_to_sort(t_stack *stack)
 int	is_circularly_sorted(t_stack *stack)
 {
 	int	break_point;
+int	ft_index_of_min(t_stack *stk)
+{
+	int	min_val;
+	int	min_index;
+	int	i;
 
+	min_val = stk->data[0];
+	min_index = 0;
+	i = 0;
+	while (i < stk->size)
+	{
+		if (stk->data[i] < min_val)
+		{
+			min_val = stk->data[i];
+			min_index = i;
+		}
+		i++;
+	}
+	return (min_index);
+}
 	break_point = find_break_point(stack);
 	if (break_point == -1) 
 		return (1);

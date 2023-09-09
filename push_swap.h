@@ -15,7 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include "./printf_42/ft_printf.h"
+//# include "./printf_42/ft_printf.h"
 
 # ifndef INT_MAX
 #  define INT_MAX 2147483647
@@ -49,9 +49,9 @@ void	free_stacks(t_stack *stack_a, t_stack *stack_b);
 void	print_stack(const char *stack_name, const t_stack *stack);
 int		is_stack_ordered(t_stack *stack);
 
-// Stack order utils
-int		rotations_to_sort(t_stack *stack);
-int		is_circularly_sorted(t_stack *stack);
+// Parse utils
+int		check_overflow(long long res);
+int		ft_mod_atoi(const char *str, int *value);
 int		has_duplicates(t_stack *stack);
 
 // Utils
@@ -61,20 +61,20 @@ int		ft_abs(int a);
 void	shift_stack_up(t_stack *stack);
 void	shift_stack_down(t_stack *stack);
 
-// Perform rotatios
-void	perform_rotations_a(t_stack *stack, int rotations);
-void	perform_rotations_b(t_stack *stack, int rotations);
-void	perform_rotations_both(t_stack *stack_a, t_stack *stack_b, int rot);
-
 // Simple sort
 void	order_stack_size_3(t_stack *stack);
 void	order_stack_size_4(t_stack *stk, t_stack *stk_b);
 void	order_stack_size_5(t_stack *stk, t_stack *stk_b);
 
-int calc_rot(t_stack stack, int index);	
-int calc_rot_both(int rot_a, int rot_b);
-int calc_ops_a_to_b(t_stack stack_a, t_stack stack_b, int index_a, int index_b);
-int	calc_t_index(t_stack t_stack, int num);
+// Radix sort
+int		get_num_at_pos(int num, int pos);
+int		get_max_num_of_digits(t_stack *stack);
+int		digit_is_checked(t_stack *stack, int pos, int digit);
+void	sort_by_num_position(t_stack *stack_a, t_stack *stack_b, int position);
+void	rev_sort_num_by_pos(t_stack *stack_a, t_stack *stack_b, int position);
+int		sort_negatives(t_stack *stack_a, t_stack *stack_b);
+int		merge_negatives(t_stack *stack_a, t_stack *stack_b);
+void	radix_sort(t_stack *stack_a, t_stack *stack_b);
 
 
 #endif

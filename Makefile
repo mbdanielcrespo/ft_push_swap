@@ -26,7 +26,7 @@ $(NAME): $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-clean: 
+clean:
 	$(RM) $(OBJ)
 
 fclean: clean

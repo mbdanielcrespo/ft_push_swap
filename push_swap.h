@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:42:34 by danalmei          #+#    #+#             */
-/*   Updated: 2023/08/30 20:04:01 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:29:29 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int		get_max_num_of_digits(t_stack *stack);
 int		digit_is_checked(t_stack *stack, int pos, int digit);
 void	sort_by_num_position(t_stack *stack_a, t_stack *stack_b, int position);
 void	rev_sort_num_by_pos(t_stack *stack_a, t_stack *stack_b, int position);
-int		sort_negatives(t_stack *stack_a, t_stack *stack_b);
-int		merge_negatives(t_stack *stack_a, t_stack *stack_b);
+void		sort_negatives(t_stack *stack_a, t_stack *stack_b);
+void		merge_negatives(t_stack *stack_a, t_stack *stack_b);
 void	radix_sort(t_stack *stack_a, t_stack *stack_b);
 
-
+void cleanup_sort(t_stack *stack_a);
 #endif

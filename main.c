@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:27:23 by danalmei          #+#    #+#             */
-/*   Updated: 2023/08/30 18:59:39 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:30:06 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	radix_sort(&stack_a, &stack_b);
-	//print_stack("A", &stack_a);
-	//print_stack("B", &stack_b);
 	free_stacks(&stack_a, &stack_b);
 	return (0);
 }

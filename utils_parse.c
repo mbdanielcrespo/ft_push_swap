@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_parse.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/09 16:32:46 by danalmei          #+#    #+#             */
+/*   Updated: 2023/09/09 16:35:20 by danalmei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int check_overflow(long long res)
+int	check_overflow(long long res)
 {
-    if (res > INT_MAX || res < INT_MIN)
-        return (0);
-    return (1);
+	if (res > INT_MAX || res < INT_MIN)
+		return (0);
+	return (1);
 }
 
 int	ft_mod_atoi(const char *str, int *value)
 {
 	long long	res;
-	int	sign;
-	int	i;
+	int			sign;
+	int			i;
 
 	res = 0;
 	sign = 1;

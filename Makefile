@@ -6,13 +6,13 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC = allowed_functions_1.c \
 allowed_functions_2.c \
-calculate_ops.c \
 main.c \
-perform_rotations.c \
-solver.c \
+radix_sort_core.c \
+radix_sort.c \
+simple_sort.c \
 utils.c \
 utils_stack.c \
-utils_stack_order.c
+utils_parse.c
 
 
 OBJ = $(SRC:.c=.o)

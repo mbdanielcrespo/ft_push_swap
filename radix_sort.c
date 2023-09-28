@@ -1,10 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/09 16:33:45 by danalmei          #+#    #+#             */
+/*   Updated: 2023/09/09 18:33:08 by danalmei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int get_num_at_pos(int num, int pos)
+int	get_num_at_pos(int num, int pos)
 {
-	int i;
-
-	i = 0;
 	while (pos != 0)
 	{
 		num = num / 10;
@@ -13,11 +22,11 @@ int get_num_at_pos(int num, int pos)
 	return (num % 10);
 }
 
-int get_max_num_of_digits(t_stack *stack)
+int	get_max_num_of_digits(t_stack *stack)
 {
-	int i;
-	int current;
-	int new;
+	int	i;
+	int	current;
+	int	new;
 
 	i = 0;
 	current = 0;
@@ -25,7 +34,7 @@ int get_max_num_of_digits(t_stack *stack)
 	while (i < stack->size)
 	{
 		current = ft_abs(stack->data[i]);
-		if(current > new)
+		if (current > new)
 			new = current;
 		i++;
 	}
@@ -43,7 +52,7 @@ int	digit_is_checked(t_stack *stack, int pos, int digit)
 	int	i;
 
 	i = 0;
-	while(i < stack->size)
+	while (i < stack->size)
 	{
 		if (get_num_at_pos(stack->data[i], pos) == digit)
 			return (0);
@@ -54,12 +63,13 @@ int	digit_is_checked(t_stack *stack, int pos, int digit)
 
 void	radix_sort(t_stack *stack_a, t_stack *stack_b)
 {
-	int i;
-	int max_digits;
+	int	i;
+	int	max_digits;
 
 	i = 0;
 	max_digits = get_max_num_of_digits(stack_a);
-	while (i <= max_digits)
+	//printf("max digits: %d\n", max_digits);
+	while (i <= max_digits || is_stack_ordered(stack_a))
 	{
 		sort_by_num_position(stack_a, stack_b, i++);
 		//print_stack("A", stack_a);
@@ -68,7 +78,7 @@ void	radix_sort(t_stack *stack_a, t_stack *stack_b)
 		//print_stack("A", stack_a);
 		//print_stack("B", stack_b);
 	}
-	printf("negatives");
+	//printf("negatives");
 	sort_negatives(stack_a, stack_b);
 	merge_negatives(stack_a, stack_b);
 }

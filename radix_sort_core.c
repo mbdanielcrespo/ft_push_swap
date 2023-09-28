@@ -78,6 +78,7 @@ void	rev_sort_num_by_pos(t_stack *stack_a, t_stack *stack_b, int position)
 				rrb(stack_b);
 			c--;
 		}
+		c = c * position;
 		while (c > 0)
 		{
 			rrb(stack_b);

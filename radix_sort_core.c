@@ -23,36 +23,54 @@ void	sort_by_num_position(t_stack *stack_a, t_stack *stack_b, int position)
 			i++;
 		}
 		i = 0;
-		digit++;;
+		digit++;
 	}
+}
+
+int	digit_is_rev_checked(t_stack *stack, int pos, int digit)
+{
+	int	i;
+
+	i = stack->size;
+	while(i > 0)
+	{
+		if (get_num_at_pos(stack->data[i], pos) == digit)
+			return (0);
+		i--;
+	}
+	return (1);
 }
 
 void	rev_sort_num_by_pos(t_stack *stack_a, t_stack *stack_b, int position)
 {
 	int	i;
+	int	c;
 	int digit;
 
-	i = 0;
-	digit = 9;
-	while (digit >= 0)
+	i = stack_b->size - 1;
+	c = stack_b->size;
+	digit = 0;
+	while (digit <= 9)
 	{
-		//printf("digir -> %d\n", digit);
-		while (i < stack_b->size)
+		while (!digit_is_rev_checked(stack_b, position, digit))
 		{
-			if (digit_is_checked(stack_b, position, digit))
-				break ;
-			if (get_num_at_pos(stack_b->data[0], position) == digit)
+			if (get_num_at_pos(stack_b->data[i], position) == digit)
 			{
-				//printf("num: %d, pos: %d, num_at_pos: %d\n", stack_b->data[0], position, get_num_at_pos(stack_b->data[0], position));
+				rrb(stack_b);
 				pa(stack_a, stack_b);
 				i--;
 			}
 			else
-				rb(stack_b);
-			i++;
+				rrb(stack_b);
+			c--;
 		}
-		i = 0;
-		digit--;
+		while (c > 0)
+		{
+			rrb(stack_b);
+			c--;
+		}
+		c = stack_b->size;
+		digit++;
 	}
 }
 

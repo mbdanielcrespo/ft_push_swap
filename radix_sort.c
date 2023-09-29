@@ -84,11 +84,11 @@ void	radix_sort(t_stack *stack_a, t_stack *stack_b)
 	while (!is_stack_ordered(stack_a))
 	{
 		sort_by_num_position(stack_a, stack_b, i++);
-		print_stack("A", stack_a);
-		print_stack("B", stack_b);
+		//print_stack("A", stack_a);
+		//print_stack("B", stack_b);
 		rev_sort_num_by_pos(stack_a, stack_b, i++);
-		print_stack("A", stack_a);
-		print_stack("B", stack_b);
+		//print_stack("A", stack_a);
+		//print_stack("B", stack_b);
 	}
 	//printf("negatives");
 	//sort_negatives(stack_a, stack_b);

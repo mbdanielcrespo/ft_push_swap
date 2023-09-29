@@ -64,7 +64,7 @@ void	rev_sort_num_by_pos(t_stack *stack_a, t_stack *stack_b, int position)
 	int	i;
 	int digit;
 
-	i = stack_b->size;
+	i = 0;
 	digit = 9;
 	while (digit >= 0)
 	{
@@ -79,11 +79,14 @@ void	rev_sort_num_by_pos(t_stack *stack_a, t_stack *stack_b, int position)
 				rb(stack_b);
 			i++;
 		}
+		//printf("Stack size -> %d, i -> %d\n", stack_b->size, i);
 		while (i < stack_b->size)
 		{
 			rb(stack_b);
 			i++;
 		}
+		//printf("Rotated to initial postion, current:\n");
+		//print_stack("B", stack_b);
 		i = 0;
 		digit--;
 	}

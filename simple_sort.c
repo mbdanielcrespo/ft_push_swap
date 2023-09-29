@@ -96,3 +96,19 @@ void	order_stack_size_5(t_stack *stk, t_stack *stk_b)
 	pa(stk, stk_b);
 	pa(stk, stk_b); 
 }
+
+int	simple_sort(t_stack *stack_a, t_stack *stack_b, int n_args)
+{
+	if (n_args <= 5)
+	{
+		if (n_args == 3)
+			order_stack_size_3(stack_a);
+		else if (n_args == 4)
+			order_stack_size_4(stack_a, stack_b);
+		else if (n_args == 5)
+			order_stack_size_5(stack_a, stack_b);
+		return (1);
+	}
+	else
+		return (0);
+}

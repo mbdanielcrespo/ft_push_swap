@@ -40,6 +40,8 @@ int	initialize_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b)
 	return (1);
 }
 
+// Falta criar o simple sort
+
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
@@ -55,8 +57,13 @@ int	main(int argc, char **argv)
 	if (is_stack_ordered(&stack_a))
 	{
 		free_stacks(&stack_a, &stack_b);
-		return (1);
+		return (0);
 	}
+	/*if (simple_sort(&stack_a, &stack_b, ))
+	{
+		free_stacks(&stack_a, &stack_b);
+		return (0);
+	}*/
 	radix_sort(&stack_a, &stack_b);
 	print_stack("A", &stack_a);
 	free_stacks(&stack_a, &stack_b);

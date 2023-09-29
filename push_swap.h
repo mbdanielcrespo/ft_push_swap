@@ -65,6 +65,7 @@ void	shift_stack_down(t_stack *stack);
 void	order_stack_size_3(t_stack *stack);
 void	order_stack_size_4(t_stack *stk, t_stack *stk_b);
 void	order_stack_size_5(t_stack *stk, t_stack *stk_b);
+int		simple_sort(t_stack *stack_a, t_stack *stack_b, int n_args);
 
 // Radix sort
 int		get_num_at_pos(int num, int pos);

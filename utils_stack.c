@@ -58,3 +58,4 @@ int	is_stack_ordered(t_stack *stack)
 	}
 	return (1); 
 }
+

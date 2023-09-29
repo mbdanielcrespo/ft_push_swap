@@ -76,10 +76,10 @@ void	push_back(t_stack *stack_a, t_stack *stack_b)
 void	radix_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int	i;
-	int	max_digits;
+	//int	max_digits;
 
 	i = 0;
-	max_digits = get_max_num_of_digits(stack_a);
+	//max_digits = get_max_num_of_digits(stack_a);
 	//printf("max digits: %d\n", max_digits);
 	while (!is_stack_ordered(stack_a))
 	{

@@ -62,34 +62,30 @@ int	digit_is_rev_checked(t_stack *stack, int pos, int digit)
 void	rev_sort_num_by_pos(t_stack *stack_a, t_stack *stack_b, int position)
 {
 	int	i;
-	int	c;
 	int digit;
 
-	i = stack_b->size - 1;
-	c = stack_b->size;
-	digit = 0;
-	while (digit <= 9)
+	i = stack_b->size;
+	digit = 9;
+	while (digit >= 0)
 	{
-		while (!digit_is_rev_checked(stack_b, position, digit))
+		while (!digit_is_checked(stack_b, position, digit))
 		{
-			if (get_num_at_pos(stack_b->data[i], position) == digit)
+			if (get_num_at_pos(stack_b->data[0], position) == digit)
 			{
-				rrb(stack_b);
 				pa(stack_a, stack_b);
 				i--;
 			}
 			else
-				rrb(stack_b);
-			c--;
+				rb(stack_b);
+			i++;
 		}
-		c = c * position;
-		while (c > 0)
+		while (i < stack_b->size)
 		{
-			rrb(stack_b);
-			c--;
+			rb(stack_b);
+			i++;
 		}
-		c = stack_b->size;
-		digit++;
+		i = 0;
+		digit--;
 	}
 }
 

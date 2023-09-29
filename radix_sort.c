@@ -73,24 +73,38 @@ void	push_back(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
+int	is_stack_rev_ordered(t_stack *stack)
+{
+	int	i;
+
+	i = 0;
+	while (i < stack->size - 1)
+	{
+		if (stack->data[i] < stack->data[i + 1])
+			return (0);
+		i++;
+	}
+	return (1); 
+}
+
 void	radix_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int	i;
-	//int	max_digits;
 
 	i = 0;
-	//max_digits = get_max_num_of_digits(stack_a);
-	//printf("max digits: %d\n", max_digits);
 	while (!is_stack_ordered(stack_a))
 	{
 		sort_by_num_position(stack_a, stack_b, i++);
-		//print_stack("A", stack_a);
-		//print_stack("B", stack_b);
-		rev_sort_num_by_pos(stack_a, stack_b, i++);
-		//print_stack("A", stack_a);
-		//print_stack("B", stack_b);
+		print_stack("A", stack_a);
+		print_stack("B", stack_b);
+		if (!is_stack_rev_ordered(stack_b))
+			rev_sort_num_by_pos(stack_a, stack_b, i++);
+		else
+			push_back(stack_a, stack_b);
+		print_stack("A", stack_a);
+		print_stack("B", stack_b);
 	}
-	//printf("negatives");
+	
 	//sort_negatives(stack_a, stack_b);
 	//merge_negatives(stack_a, stack_b);
 }

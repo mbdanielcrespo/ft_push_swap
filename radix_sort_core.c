@@ -22,10 +22,8 @@ void	sort_by_num_position(t_stack *stack_a, t_stack *stack_b, int position)
 	while (digit <= 9)
 	{
 		//printf("digits: %d\n", digit);
-		while (i < stack_a->size)
+		while (!digit_is_checked(stack_a, position, digit))
 		{
-			if (digit_is_checked(stack_a, position, digit))
-				break ;
 			if (get_num_at_pos(stack_a->data[0], position) == digit)
 			{
 				//printf("a>b num: %d  pos: %d, num_at_pos: %d\n", stack_a->data[0], position, get_num_at_pos(stack_a->data[0], position));
@@ -36,8 +34,14 @@ void	sort_by_num_position(t_stack *stack_a, t_stack *stack_b, int position)
 				ra(stack_a);
 			i++;
 		}
+		//printf("Stack a size -> %d, i -> %d\n", stack_a->size, i);
+		while (i < stack_a->size)
+		{
+			ra(stack_a);
+			i++;
+		}
 		i = 0;
-		digit++;;
+		digit++;
 	}
 }
 

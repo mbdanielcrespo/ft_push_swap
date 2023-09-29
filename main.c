@@ -58,7 +58,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	radix_sort(&stack_a, &stack_b);
-	//print_stack("A", &stack_a);
+	print_stack("A", &stack_a);
 	free_stacks(&stack_a, &stack_b);
 	return (0);
 }

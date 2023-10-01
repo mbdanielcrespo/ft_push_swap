@@ -12,58 +12,59 @@
 
 #include "push_swap.h"
 
-int	check_overflow(long long res)
+int	ft_contains(int num, char **argv, int i)
 {
-	if (res > INT_MAX || res < INT_MIN)
-		return (0);
-	return (1);
-}
-
-int	ft_mod_atoi(const char *str, int *value)
-{
-	long long	res;
-	int			sign;
-	int			i;
-
-	res = 0;
-	sign = 1;
-	i = 0;
-	if (str[0] == '-') 
+	i++;
+	while (argv[i])
 	{
-		sign = -1;
-		i++;
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-	}
-	while (str[i] != '\0') 
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		res = res * 10 + (str[i] - '0') * sign;
-		if (!check_overflow(res))
-			return (0);
-		i++;
-	}
-	*value = (int)res;
-	return (1);
-}
-
-int	has_duplicates(t_stack *stack)
-{
-	int	i; 
-	int	j;
-
-	i = 0;
-	while (i < stack->size) 
-	{
-		j = i + 1;
-		while (j < stack->size) 
-		{
-			if (stack->data[i] == stack->data[j])
-				return (1);
-			j++;
-		}
+		if (ft_atoi(argv[i]) == num)
+			return (1);
 		i++;
 	}
 	return (0);
+}
+
+int	ft_isnum(char *num)
+{
+	int	i;
+
+	i = 0;
+	if (num[0] == '-')
+		i++;
+	while (num[i])
+	{
+		if (!ft_isdigit(num[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	ft_check_args(int argc, char **argv)
+{
+	int		i;
+	long	tmp;
+	char	**args;	
+
+	i = 0;
+	if (argc == 2)
+		args = ft_split(argv[1], ' ');
+	else
+	{
+		i = 1;
+		args = argv;
+	}
+	while (args[i])
+	{
+		tmp = ft_atoi(args[i]);
+		if (!ft_isnum(args[i]))
+			ft_error("Error");
+		if (ft_contains(tmp, args, i))
+			ft_error("Error");
+		if (tmp < -2147483648 || tmp > 2147483647)
+			ft_error("Error");
+		i++;
+	}
+	if (argc == 2)
+		ft_free(args);
 }

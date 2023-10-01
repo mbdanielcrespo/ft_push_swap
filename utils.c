@@ -12,52 +12,84 @@
 
 #include "push_swap.h"
 
-int	ft_min(int a, int b)
+void	ft_error(char *msg)
 {
-	if (b < a)
-		return (b);
-	else
-		return (a);
+	ft_putendl_fd(msg, 1);
+	exit(0);
 }
 
-int	ft_max(int a, int b)
+int	get_distance(t_list **stack, int index)
 {
-	if (b > a)
-		return (b);
-	else
-		return (a);
-}
+	t_list	*head;
+	int		distance;
 
-int	ft_abs(int a)
-{
-	if (a < 0)
-		return (a * -1);
-	else
-		return (a);
-}
-
-void	shift_stack_up(t_stack *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < stack->size - 1)
+	distance = 0;
+	head = *stack;
+	while (head)
 	{
-		stack->data[i] = stack->data[i + 1];
-		i++;
+		if (head->index == index)
+			break ;
+		distance++;
+		head = head->next;
 	}
-	stack->size--;
+	return (distance);
 }
 
-void	shift_stack_down(t_stack *stack)
+void	make_top(t_list **stack, int distance)
 {
-	int	i;
+	t_list	*head;
+	int		tmp;
 
-	i = stack->size - 1;
-	while (i >= 0)
+	if (distance == 0)
+		return ;
+	head = *stack;
+	tmp = ft_lstsize(head) - distance;
+	if (distance <= (ft_lstsize(head) / 2))
 	{
-		stack->data[i + 1] = stack->data[i];
-		i--;
+		while (distance-- > 0)
+			ra(stack);
 	}
-	stack->size++;
+	else
+	{
+		while (tmp-- > 0)
+			rra(stack);
+	}
+}
+
+static t_list	*get_next_min(t_list **stack)
+{
+	t_list	*head;
+	t_list	*min;
+	int		has_min;
+
+	min = NULL;
+	has_min = 0;
+	head = *stack;
+	if (head)
+	{
+		while (head)
+		{
+			if ((head->index == -1) && (!has_min || head->value < min->value))
+			{
+				min = head;
+				has_min = 1;
+			}
+			head = head->next;
+		}
+	}
+	return (min);
+}
+
+void	index_stack(t_list **stack)
+{
+	t_list	*head;
+	int		index;
+
+	index = 0;
+	head = get_next_min(stack);
+	while (head)
+	{
+		head->index = index++;
+		head = get_next_min(stack);
+	}
 }

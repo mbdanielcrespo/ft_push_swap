@@ -12,75 +12,42 @@
 
 #include "push_swap.h"
 
-void	sa(t_stack *stack)
+int	sa(t_list **stack_a)
 {
-	int	tmp;
-
-	if (stack->size > 1)
-	{
-		tmp = stack->data[0];
-		stack->data[0] = stack->data[1];
-		stack->data[1] = tmp;
-		printf("sa\n");
-	}
+	if (swap(stack_a) == -1)
+		return (-1);
+	printf("sa\n");
+	return (0);
 }
 
-void	sb(t_stack *stack)
+int	sb(t_list **stack_b)
 {
-	int	tmp;
-
-	if (stack->size > 1)
-	{
-		tmp = stack->data[0];
-		stack->data[0] = stack->data[1];
-		stack->data[1] = tmp;
-		printf("sb\n");
-	}
+	if (swap(stack_b) == -1)
+		return (-1);
+	printf("sb\n");
+	return (0);
 }
 
-void	pa(t_stack *stack_a, t_stack *stack_b)
+int	pa(t_list **stack_a, t_list **stack_b)
 {
-	int	value;
-
-	if (stack_b->size > 0)
-	{
-		value = stack_b->data[0];
-		shift_stack_up(stack_b);
-		shift_stack_down(stack_a);
-		stack_a->data[0] = value;
-		printf("pa\n");
-	}
+	if (push(stack_a, stack_b) == -1)
+		return (-1);
+	printf("pa\n");
+	return (0);
 }
 
-void	pb(t_stack *stack_a, t_stack *stack_b)
+int	pb(t_list **stack_a, t_list **stack_b)
 {
-	int	value;
-
-	if (stack_a->size > 0)
-	{
-		value = stack_a->data[0];
-		shift_stack_up(stack_a);
-		shift_stack_down(stack_b);
-		stack_b->data[0] = value;
-		printf("pb\n");
-	}
+	if (push(stack_b, stack_a) == -1)
+		return (-1);
+	printf("pb\n");
+	return (0);
 }
 
-void	ra(t_stack *stack)
+int	ra(t_list **stack_a)
 {
-	int	i;
-	int	value;
-
-	if (stack->size > 1)
-	{
-		value = stack->data[0];
-		i = 0;
-		while (i < stack->size - 1)
-		{
-			stack->data[i] = stack->data[i + 1];
-			i++;
-		}
-		stack->data[stack->size - 1] = value;
-		printf("ra\n");
-	}
+	if (rotate(stack_a) == -1)
+		return (-1);
+	printf("ra\n");
+	return (0);
 }

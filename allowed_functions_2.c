@@ -12,72 +12,46 @@
 
 #include "push_swap.h"
 
-void	rb(t_stack *stack)
+int	rb(t_list **stack_b)
 {
-	int	i;
-	int	value;
-
-	if (stack->size > 1)
-	{
-		value = stack->data[0];
-		i = 0;
-		while (i < stack->size - 1)
-		{
-			stack->data[i] = stack->data[i + 1];
-			i++;
-		}
-		stack->data[stack->size - 1] = value;
-		printf("rb\n");
-	}
+	if (rotate(stack_b) == -1)
+		return (-1);
+	printf("rb\n");
+	return (0);
 }
 
-void	rr(t_stack *stack_a, t_stack *stack_b)
+int	rr(t_list **stack_a, t_list **stack_b)
 {
-	ra(stack_a);
-	rb(stack_b);
+	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
+		return (-1);
+	rotate(stack_a);
+	rotate(stack_b);
+	printf("rr\n");
+	return (0);
 }
 
-void	rra(t_stack *stack)
+int	rra(t_list **stack_a)
 {
-	int	value;
-	int	i;
-
-	if (stack->size > 1)
-	{
-		value = stack->data[stack->size - 1];
-		i = stack->size - 1;
-		while (i > 0)
-		{
-			stack->data[i] = stack->data[i - 1];
-			i--;
-		}
-		stack->data[0] = value;
-		printf("rra\n");
-	}
+	if (r_rotate(stack_a) == -1)
+		return (-1);
+	printf("rra\n");
+	return (0);
 }
 
-void	rrb(t_stack *stack)
+int	rrb(t_list **stack_b)
 {
-	int	value;
-	int	i;
-
-	if (stack->size > 1)
-	{
-		value = stack->data[stack->size - 1];
-		i = stack->size - 1;
-		while (i > 0)
-		{
-			stack->data[i] = stack->data[i - 1];
-			i--;
-		}
-		stack->data[0] = value;
-		printf("rrb\n");
-	}
+	if (r_rotate(stack_b) == -1)
+		return (-1);
+	printf("rrb\n");
+	return (0);
 }
 
-void	rrr(t_stack *stack_a, t_stack *stack_b)
+int	rrr(t_list **stack_a, t_list **stack_b)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
+		return (-1);
+	r_rotate(stack_a);
+	r_rotate(stack_b);
 	printf("rrr\n");
+	return (0);
 }

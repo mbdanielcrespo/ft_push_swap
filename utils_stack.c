@@ -12,50 +12,55 @@
 
 #include "push_swap.h"
 
-void	init_stack(t_stack *stack, int max_size)
+int	is_sorted(t_list **stack)
 {
-	stack->data = (int *)malloc((max_size + 1) * sizeof(int));
-	stack->size = 0;
-}
+	t_list	*head;
 
-void	free_stack(t_stack *stack)
-{
-	free(stack->data);
-	stack->data = NULL;
-	stack->size = 0;
-}
-
-void	free_stacks(t_stack *stack_a, t_stack *stack_b)
-{
-	free_stack(stack_a);
-	free_stack(stack_b);
-}
-
-void	print_stack(const char *stack_name, const t_stack *stack)
-{
-	int	i;
-
-	i = 0;
-	printf("%s Stack (size: %d): ", stack_name, stack->size);
-	while (i < stack->size) 
+	head = *stack;
+	while (head && head->next)
 	{
-		printf("%d ", stack->data[i]);
-		i++;
-	}
-	printf("\n");
-}
-
-int	is_stack_ordered(t_stack *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < stack->size - 1)
-	{
-		if (stack->data[i] > stack->data[i + 1])
+		if (head->value > head->next->value)
 			return (0);
-		i++;
+		head = head->next;
 	}
-	return (1); 
+	return (1);
 }
 
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	while (i >= 0)
+		free(str[i--]);
+}
+
+void	free_stack(t_list **stack)
+{
+	t_list	*head;
+	t_list	*tmp;
+
+	head = *stack;
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+	free(stack);
+}
+
+void	print_list(t_list *head)
+{
+	t_list	*tmp;
+
+	tmp = head;
+	while (tmp != NULL)
+	{
+		ft_putnbr_fd(tmp->value, 1);
+		ft_putendl_fd("", 1);
+		tmp = tmp->next;
+	}
+}

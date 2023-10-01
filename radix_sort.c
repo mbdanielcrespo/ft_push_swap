@@ -12,99 +12,51 @@
 
 #include "push_swap.h"
 
-int	get_num_at_pos(int num, int pos)
+static int	get_max_bits(t_list **stack)
 {
-	while (pos != 0)
+	t_list	*head;
+	int		max;
+	int		max_bits;
+
+	head = *stack;
+	max = head->index;
+	max_bits = 0;
+	while (head)
 	{
-		num = num / 10;
-		pos--;
+		if (head->index > max)
+			max = head->index;
+		head = head->next;
 	}
-	return (num % 10);
+	while ((max >> max_bits) != 0)
+		max_bits++;
+	return (max_bits);
 }
 
-int	get_max_num_of_digits(t_stack *stack)
+void	radix_sort(t_list **stack_a, t_list **stack_b)
 {
-	int	i;
-	int	current;
-	int	new;
+	t_list	*head_a;
+	int		i;
+	int		j;
+	int		size;
+	int		max_bits;
 
 	i = 0;
-	current = 0;
-	new = INT_MIN;
-	while (i < stack->size)
+	head_a = *stack_a;
+	size = ft_lstsize(head_a);
+	max_bits = get_max_bits(stack_a);
+	while (i < max_bits)
 	{
-		current = ft_abs(stack->data[i]);
-		if (current > new)
-			new = current;
+		j = 0;
+		while (j++ < size)
+		{
+			head_a = *stack_a;
+			if (((head_a->index >> i) & 1) == 1)
+				ra(stack_a);
+			else
+				pb(stack_a, stack_b);
+		}
+		while (ft_lstsize(*stack_b) != 0)
+			pa(stack_a, stack_b);
 		i++;
 	}
-	i = 0;
-	while (new != 0)
-	{
-		new = new / 10;
-		i++;
-	}
-	return (i);
-}
-
-int	digit_is_checked(t_stack *stack, int pos, int digit)
-{
-	int	i;
-
-	i = 0;
-	while (i < stack->size)
-	{
-		if (get_num_at_pos(stack->data[i], pos) == digit)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	push_back(t_stack *stack_a, t_stack *stack_b)
-{
-	int	i;
-
-	i = stack_b->size;
-	while (i > 0)
-	{
-		pa(stack_a, stack_b);
-		i--;
-	}
-}
-
-int	is_stack_rev_ordered(t_stack *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < stack->size - 1)
-	{
-		if (stack->data[i] < stack->data[i + 1])
-			return (0);
-		i++;
-	}
-	return (1); 
-}
-
-void	radix_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	int	i;
-
-	i = 0;
-	while (!is_stack_ordered(stack_a))
-	{
-		sort_by_num_position(stack_a, stack_b, i++);
-		print_stack("A", stack_a);
-		print_stack("B", stack_b);
-		if (!is_stack_rev_ordered(stack_b))
-			rev_sort_num_by_pos(stack_a, stack_b, i++);
-		else
-			push_back(stack_a, stack_b);
-		print_stack("A", stack_a);
-		print_stack("B", stack_b);
-	}
-	
-	//sort_negatives(stack_a, stack_b);
-	//merge_negatives(stack_a, stack_b);
 }

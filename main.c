@@ -12,60 +12,66 @@
 
 #include "push_swap.h"
 
-int	initialize_stacks(int argc, char **argv, t_stack *stack_a, t_stack *stack_b)
+void	init_stack(t_list **stack, int argc, char **argv)
 {
-	int		value;
+	t_list	*new;
+	char	**args;
 	int		i;
 
-	init_stack(stack_a, argc - 1);
-	init_stack(stack_b, argc - 1);
-	i = 1;
-	while (i < argc) 
+	i = 0;
+	if (argc == 2)
+		args = ft_split(argv[1], ' ');
+	else
 	{
-		if (!ft_mod_atoi(argv[i], &value)) 
-		{
-			write(2, "Error\n", 6);
-			free_stacks(stack_a, stack_b);
-			return (0);
-		}
-		stack_a->data[stack_a->size++] = value;
+		i = 1;
+		args = argv;
+	}
+	while (args[i])
+	{
+		new = ft_lstnew(ft_atoi(args[i]));
+		ft_lstadd_back(stack, new);
 		i++;
 	}
-	if (has_duplicates(stack_a)) 
-	{
-		write(2, "Error\n", 6);
-		free_stacks(stack_a, stack_b);
-		return (0);
-	}
-	return (1);
+	index_stack(stack);
+	if (argc == 2)
+		ft_free(args);
 }
 
-// Falta criar o simple sort
+void	sort_stack(t_list **stack_a, t_list **stack_b)
+{
+	if (ft_lstsize(*stack_a) <= 5)
+		simple_sort(stack_a, stack_b);
+	else
+		radix_sort(stack_a, stack_b);
+}
 
 int	main(int argc, char **argv)
 {
-	t_stack	stack_a;
-	t_stack	stack_b;
+	t_list	**stack_a;
+	t_list	**stack_b;
 
 	if (argc < 2)
+		return (-1);
+	ft_check_args(argc, argv);
+	stack_a = (t_list **)malloc(sizeof(t_list));
+	stack_b = (t_list **)malloc(sizeof(t_list));
+	*stack_a = NULL;
+	*stack_b = NULL;
+	init_stack(stack_a, argc, argv);
+	if (is_sorted(stack_a))
 	{
-		write(2, "Error\n", 6);
-		return (1);
-	}
-	if (!initialize_stacks(argc, argv, &stack_a, &stack_b))
-		return (1);
-	if (is_stack_ordered(&stack_a))
-	{
-		free_stacks(&stack_a, &stack_b);
+		free_stack(stack_a);
+		free_stack(stack_b);
 		return (0);
 	}
-	/*if (simple_sort(&stack_a, &stack_b, ))
-	{
-		free_stacks(&stack_a, &stack_b);
-		return (0);
-	}*/
-	radix_sort(&stack_a, &stack_b);
-	print_stack("A", &stack_a);
-	free_stacks(&stack_a, &stack_b);
+
+	print_list(*stack_a);
+	//print_list(*stack_b);
+	sort_stack(stack_a, stack_b);
+	print_list(*stack_a);
+	//print_list(*stack_b);
+
+	free_stack(stack_a);
+	free_stack(stack_b);
 	return (0);
 }

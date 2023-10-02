@@ -15,8 +15,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include "./ft_libft/libft.h"
-//# include "./printf_42/ft_printf.h"
+# include "../ft_libft/libft.h"
+# include "../ft_printf/ft_printf.h"
 
 typedef struct s_list
 {
@@ -52,7 +52,7 @@ int		rrb(t_list **stack_b);
 int		rrr(t_list **stack_a, t_list **stack_b);
 
 // Stack utils
-void	print_list(t_list *head);
+void	print_stack(t_list *head, char *name);
 
 void	ft_error(char *msg);
 void	ft_check_args(int argc, char **argv);

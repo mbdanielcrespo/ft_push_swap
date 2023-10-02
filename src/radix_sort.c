@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-static int	get_max_bits(t_list **stack)
+int	get_max_bits(t_list **stack)
 {
 	t_list	*head;
 	int		max;

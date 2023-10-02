@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 int	is_sorted(t_list **stack)
 {
@@ -52,15 +52,16 @@ void	free_stack(t_list **stack)
 	free(stack);
 }
 
-void	print_list(t_list *head)
+void	print_stack(t_list *head, char *name)
 {
 	t_list	*tmp;
 
 	tmp = head;
+	ft_printf("Stack %s: ", name);
 	while (tmp != NULL)
 	{
-		ft_putnbr_fd(tmp->value, 1);
-		ft_putendl_fd("", 1);
+		ft_printf("%d ", tmp->value);
 		tmp = tmp->next;
 	}
+	ft_printf("\n");
 }

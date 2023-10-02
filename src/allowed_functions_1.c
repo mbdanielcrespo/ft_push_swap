@@ -1,57 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allowed_functions_2.c                              :+:      :+:    :+:   */
+/*   allowed_functions_1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:56:50 by danalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 16:25:23 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:25:45 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-int	rb(t_list **stack_b)
+int	sa(t_list **stack_a)
 {
-	if (rotate(stack_b) == -1)
+	if (swap(stack_a) == -1)
 		return (-1);
-	printf("rb\n");
+	printf("sa\n");
 	return (0);
 }
 
-int	rr(t_list **stack_a, t_list **stack_b)
+int	sb(t_list **stack_b)
 {
-	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
+	if (swap(stack_b) == -1)
 		return (-1);
-	rotate(stack_a);
-	rotate(stack_b);
-	printf("rr\n");
+	printf("sb\n");
 	return (0);
 }
 
-int	rra(t_list **stack_a)
+int	pa(t_list **stack_a, t_list **stack_b)
 {
-	if (r_rotate(stack_a) == -1)
+	if (push(stack_a, stack_b) == -1)
 		return (-1);
-	printf("rra\n");
+	printf("pa\n");
 	return (0);
 }
 
-int	rrb(t_list **stack_b)
+int	pb(t_list **stack_a, t_list **stack_b)
 {
-	if (r_rotate(stack_b) == -1)
+	if (push(stack_b, stack_a) == -1)
 		return (-1);
-	printf("rrb\n");
+	printf("pb\n");
 	return (0);
 }
 
-int	rrr(t_list **stack_a, t_list **stack_b)
+int	ra(t_list **stack_a)
 {
-	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
+	if (rotate(stack_a) == -1)
 		return (-1);
-	r_rotate(stack_a);
-	r_rotate(stack_b);
-	printf("rrr\n");
+	printf("ra\n");
 	return (0);
 }

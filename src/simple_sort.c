@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h" //Pedir gonçalo
+#include "../inc/push_swap.h" //Pedir gonçalo
 
-static int	get_min(t_list **stack, int val)
+int	get_min(t_list **stack, int val)
 {
 	t_list	*head;
 	int		min;

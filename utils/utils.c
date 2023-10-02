@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	ft_error(char *msg)
 {
-	ft_putendl_fd(msg, 1);
+	printf("%s", msg);
 	exit(0);
 }
 
@@ -56,7 +56,7 @@ void	make_top(t_list **stack, int distance)
 	}
 }
 
-static t_list	*get_next_min(t_list **stack)
+t_list	*get_next_min(t_list **stack)
 {
 	t_list	*head;
 	t_list	*min;

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	init_stack(t_list **stack, int argc, char **argv)
 {
@@ -65,11 +65,9 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 
-	print_list(*stack_a);
-	//print_list(*stack_b);
+	print_stack(*stack_a, "A");
 	sort_stack(stack_a, stack_b);
-	print_list(*stack_a);
-	//print_list(*stack_b);
+	print_stack(*stack_a, "A");
 
 	free_stack(stack_a);
 	free_stack(stack_b);

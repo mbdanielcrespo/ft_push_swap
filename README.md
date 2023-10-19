@@ -1,4 +1,4 @@
-# **Push Swap - 42 School project**#
+# **Push Swap - 42 School project**
 ### **Project outline**
 This project challenges you to develop an efficient sorting algorithm to arrange a set of integers using a limited set of instructions while minimizing the number of operations. The program takes an unsorted list of integers and sort them using two stacks, Stack A and Stack B, while adhering to a specific set of instructions.
 
@@ -19,5 +19,8 @@ Quick Sort is a highly efficient sorting algorithm with an average-case time com
 
 ## **The code**
 I choose to start with the turk sort because it made more sense, but ended up doing the radix sort because of the simplicity and the saved up time.
-The code is structured in three main parts (not divided by folders) which are: the allowed set of instructions in the **'actions.c'**, **'allowed_functions_1.c'** and **'allowed_functions_2.c'**; The **'simple_sort.c'** which is the code to sort the cases of 3, 4 and 5 elements in the minimum ammount of instructions allowed; And the **'radix_sort.c'** where the algorithm is developed.
+The code is structured in three main parts (not divided by folders) which are:
+The allowed set of instructions in the **'actions.c'**, **'allowed_functions_1.c'** and **'allowed_functions_2.c'**
+The **'simple_sort.c'** which is the code to sort the cases of 3, 4 and 5 elements in the minimum ammount of instructions allowed
+The **'radix_sort.c'** where the algorithm is developed.
 There are also three utils files, one for parsing the stack and checking for errors, other for stack utils, like, initializing, printing, freeing and checking if is sorted and the last one for the algorithm mostly with the functions that rotate the stack and index the stack elements from lower to higher.

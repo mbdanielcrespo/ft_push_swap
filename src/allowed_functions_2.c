@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:56:50 by danalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 16:25:23 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:57:12 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	rb(t_list **stack_b)
 {
 	if (rotate(stack_b) == -1)
 		return (-1);
-	printf("rb\n");
+	ft_printf("rb\n");
 	return (0);
 }
 
@@ -26,7 +26,7 @@ int	rr(t_list **stack_a, t_list **stack_b)
 		return (-1);
 	rotate(stack_a);
 	rotate(stack_b);
-	printf("rr\n");
+	ft_printf("rr\n");
 	return (0);
 }
 
@@ -34,7 +34,7 @@ int	rra(t_list **stack_a)
 {
 	if (r_rotate(stack_a) == -1)
 		return (-1);
-	printf("rra\n");
+	ft_printf("rra\n");
 	return (0);
 }
 
@@ -42,7 +42,7 @@ int	rrb(t_list **stack_b)
 {
 	if (r_rotate(stack_b) == -1)
 		return (-1);
-	printf("rrb\n");
+	ft_printf("rrb\n");
 	return (0);
 }
 
@@ -52,6 +52,6 @@ int	rrr(t_list **stack_a, t_list **stack_b)
 		return (-1);
 	r_rotate(stack_a);
 	r_rotate(stack_b);
-	printf("rrr\n");
+	ft_printf("rrr\n");
 	return (0);
 }

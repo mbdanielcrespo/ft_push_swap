@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:27:23 by danalmei          #+#    #+#             */
-/*   Updated: 2023/09/09 18:30:06 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:37:05 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ int	main(int argc, char **argv)
 	t_list	**stack_a;
 	t_list	**stack_b;
 
-	if (argc < 2)
-		return (-1);
-	ft_check_args(argc, argv);
+	if (argc <= 2)
+		return (0);
+	if (ft_check_args(argc, argv))
+		ft_error("Error");
 	stack_a = (t_list **)malloc(sizeof(t_list));
 	stack_b = (t_list **)malloc(sizeof(t_list));
 	*stack_a = NULL;
@@ -64,11 +65,7 @@ int	main(int argc, char **argv)
 		free_stack(stack_b);
 		return (0);
 	}
-
-	print_stack(*stack_a, "A");
 	sort_stack(stack_a, stack_b);
-	print_stack(*stack_a, "A");
-
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);

@@ -6,75 +6,64 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:25:45 by danalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 13:55:33 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:09:20 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	ft_error(char *msg)
-{
-	printf("%s", msg);
-	exit(0);
-}
-
 int	get_distance(t_list **stack, int index)
 {
-	t_list	*head;
+	t_list	*top;
 	int		distance;
 
 	distance = 0;
-	head = *stack;
-	while (head)
+	top = *stack;
+	while (top)
 	{
-		if (head->index == index)
+		if (top->index == index)
 			break ;
 		distance++;
-		head = head->next;
+		top = top->next;
 	}
 	return (distance);
 }
 
-void	make_top(t_list **stack, int distance)
+int	get_min(t_list **stack, int val)
 {
-	t_list	*head;
-	int		tmp;
+	t_list	*top;
+	int		min;
 
-	if (distance == 0)
-		return ;
-	head = *stack;
-	tmp = ft_lstsize(head) - distance;
-	if (distance <= (ft_lstsize(head) / 2))
+	top = *stack;
+	min = top->index;
+	while (top->next)
 	{
-		while (distance-- > 0)
-			ra(stack);
+		top = top->next;
+		if ((top->index < min) && top->index != val)
+			min = top->index;
 	}
-	else
-	{
-		while (tmp-- > 0)
-			rra(stack);
-	}
+	return (min);
 }
 
 t_list	*get_next_min(t_list **stack)
 {
-	t_list	*head;
+	t_list	*top;
 	t_list	*min;
 	int		has_min;
 
 	min = NULL;
 	has_min = 0;
-	head = *stack;
-	if (head)
+	top = *stack;
+	if (top)
 	{
-		while (head)
+		while (top)
 		{
-			if ((head->index == -1) && (!has_min || head->value < min->value))
+			if ((top->index == -1) && (!has_min || top->value < min->value))
 			{
-				min = head;
+				min = top;
 				has_min = 1;
 			}
-			head = head->next;
+			top = top->next;
 		}
 	}
 	return (min);
@@ -82,14 +71,14 @@ t_list	*get_next_min(t_list **stack)
 
 void	index_stack(t_list **stack)
 {
-	t_list	*head;
+	t_list	*top;
 	int		index;
 
 	index = 0;
-	head = get_next_min(stack);
-	while (head)
+	top = get_next_min(stack);
+	while (top)
 	{
-		head->index = index++;
-		head = get_next_min(stack);
+		top->index = index++;
+		top = get_next_min(stack);
 	}
 }

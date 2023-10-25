@@ -6,7 +6,7 @@
 /*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:42:34 by danalmei          #+#    #+#             */
-/*   Updated: 2023/09/09 18:29:29 by danalmei         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:10:15 by danalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define PUSH_SWAP_H
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
-# include "../ft_libft/libft.h"
-# include "../ft_printf/ft_printf.h"
+# include "../libft/libft.h"
 
 typedef struct s_list
 {
@@ -31,7 +29,6 @@ t_list	*ft_lstlast(t_list *head);
 void	ft_lstadd_front(t_list **stack, t_list *new);
 void	ft_lstadd_back(t_list **stack, t_list *new);
 int		ft_lstsize(t_list *head);
-
 
 // Actions
 int		swap(t_list **stack);
@@ -53,14 +50,12 @@ int		rrr(t_list **stack_a, t_list **stack_b);
 
 // Stack utils
 void	print_stack(t_list *head, char *name);
-
-void	ft_error(char *msg);
-void	ft_check_args(int argc, char **argv);
-int		is_sorted(t_list **stack);
-int		get_distance(t_list **stack, int index);
-void	make_top(t_list **stack, int distance);
 void	free_stack(t_list **stack);
 void	ft_free(char **str);
+int		ft_check_args(int argc, char **argv);
+int		is_sorted(t_list **stack);
+int		get_distance(t_list **stack, int index);
+int		get_min(t_list **stack, int val);
 
 // Algo
 void	radix_sort(t_list **stack_a, t_list **stack_b);

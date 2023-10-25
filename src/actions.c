@@ -1,80 +1,94 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danalmei <danalmei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 13:07:51 by danalmei          #+#    #+#             */
+/*   Updated: 2023/10/25 13:08:32 by danalmei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
-int swap(t_list **stack) {
-    t_list *head; 
-    t_list *next;
-    int tmp_val;
-    int tmp_index;   
+int	swap(t_list **stack)
+{
+	t_list	*top;
+	t_list	*next;
 
-    if (ft_lstsize(*stack) < 2)
-        return (-1);
-    head = *stack;
-	next = head->next;
-    if (!head && !next)
-        ft_error("Error occurred while swapping!"); 
-	tmp_val = head->value;
-    tmp_index = head->index;
-    head->value = next->value;
-    head->index = next->index;
-    next->value = tmp_val;
-    next->index = tmp_index;
-    return (0);
+	if (ft_lstsize(*stack) < 2)
+		return (-1);
+	top = *stack;
+	next = top->next;
+	if (!top && !next)
+		ft_error("Error while swapping!");
+	ft_swap(&top->value, &next->value);
+	ft_swap(&top->index, &next->index);
+	return (0);
 }
 
+int	push(t_list **stack_to, t_list **stack_from)
+{
+	t_list	*tmp;
+	t_list	*top_to;
+	t_list	*top_from;
 
-int push(t_list **stack_to, t_list **stack_from) {
-    t_list *tmp;
-    t_list *head_to;
-    t_list *head_from;
-
-    if (ft_lstsize(*stack_from) == 0)
-        return (-1);
-    head_to = *stack_to;
-    head_from = *stack_from;
-    tmp = head_from;			// Move the top node from the source stack to the temporary pointer
-    *stack_from = head_from->next;	// Update the source stack's head to point to the new top node
-    if (!head_to)  	// If empty, make the destination stack's head point to the moved node
-	{   
-        head_to = tmp;
-        head_to->next = NULL;
-        *stack_to = head_to;
-    } else 			// If not empty, attach the moved node to the destination stack
+	if (ft_lstsize(*stack_from) == 0)
+		ft_error("Error while pushing!");
+	top_to = *stack_to;
+	top_from = *stack_from;
+	tmp = top_from;
+	top_from = top_from->next;
+	*stack_from = top_from;
+	if (!top_to)
 	{
-        tmp->next = head_to;
-        *stack_to = tmp;
-    }
-    return (0);
+		top_to = tmp;
+		top_to->next = NULL;
+		*stack_to = top_to;
+	}
+	else
+	{
+		tmp->next = top_to;
+		*stack_to = tmp;
+	}
+	return (0);
 }
 
 int	rotate(t_list **stack)
 {
-	t_list	*head;
-	t_list	*tail;
+	t_list	*top;
+	t_list	*bottom;
 
 	if (ft_lstsize(*stack) < 2)
-		return (-1);
-	head = *stack;
-	tail = ft_lstlast(head);
-	*stack = head->next;
-	head->next = NULL;
-	tail->next = head;
+		ft_error("Error while rotating!");
+	top = *stack;
+	bottom = ft_lstlast(top);
+	*stack = top->next;
+	top->next = NULL;
+	bottom->next = top;
 	return (0);
 }
 
-int r_rotate(t_list **stack) {
-    t_list *head;
-	t_list *tail;
-	
+int	r_rotate(t_list **stack)
+{
+	t_list	*top;
+	t_list	*bottom;
+
 	if (ft_lstsize(*stack) < 2)
-        return (-1);
-
-    head = *stack;
-    tail = ft_lstlast(head);
-
-    tail->next = head;
-    *stack = tail->next;
-    head = tail->next;
-    head->next = NULL;
-    return (0);
+		ft_error("Error while r_rotating!");
+	top = *stack;
+	bottom = ft_lstlast(top);
+	while (top)
+	{
+		if (!top->next->next)
+		{
+			top->next = NULL;
+			break ;
+		}
+		top = top->next;
+	}
+	bottom->next = *stack;
+	*stack = bottom;
+	return (0);
 }
-
